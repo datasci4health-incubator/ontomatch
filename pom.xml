@@ -109,12 +109,12 @@
 
 		<!-- É preciso executar o pom duas vezes. A primeira com esta dependência 
 			comentada, para jogar o .jar do metamap pro repositório. A segunda executa 
-			com isto descomentado -->
+			com isto descomentado
 		<dependency>
 			<groupId>org.metamap</groupId>
 			<artifactId>metamap</artifactId>
 			<version>2.3</version>
-		</dependency>
+		</dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
 		<dependency>
