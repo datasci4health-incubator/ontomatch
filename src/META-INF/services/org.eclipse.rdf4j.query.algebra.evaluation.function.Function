@@ -1,0 +1,2 @@
+br.unicamp.ic.lis.ontomatch.filters.rdf4j.LevenshteinFilter
+br.unicamp.ic.lis.ontomatch.filters.rdf4j.NormalizedLevenshteinFilter

@@ -17,7 +17,8 @@ import com.sun.jersey.api.json.JSONConfiguration;
 
 public class TestClient {
 	public static void main(String[] args) throws IOException, JSONException {
-		getResources();
+		getMeshTerms();
+//		getResources();
 //		getMetaMapResource();
 	}
 
@@ -61,6 +62,37 @@ public class TestClient {
 
 		Client client = Client.create(clientConfig);
 		WebResource webResource = client.resource("http://localhost:8080/ontomatch/rest/resources");
+
+		ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON).type(MediaType.APPLICATION_JSON).post(ClientResponse.class, jsonParams);
+
+		if (response.getStatus() != 200) {
+			throw new RuntimeException("Failed : HTTP error code : "+ response.getStatus());
+		}
+		String responseBody = response.getEntity(String.class);
+
+//		System.out.println("Response: " + responseBody);
+//		JSONObject responseJson = new JSONObject(responseBody);
+//		System.out.println("Response Json: "+ responseJson);
+//
+//		JSONArray resourcesJSON = responseJson.getJSONArray("entity");
+//
+//		System.out.println("Resources: " + resourcesJSON);
+//		
+//		for (int i = 0; i < resourcesJSON.length(); i++) {
+//			System.out.println("label: " + ((JSONObject)resourcesJSON.get(i)).get("label"));
+//		}
+//		
+	}
+	
+	private static void getMeshTerms() throws IOException, JSONException{
+		String params = "{text:chest pain, n:5, ontology:mesh, algorithm:Levenshtein}";
+		JSONObject jsonParams = new JSONObject(params);
+
+		ClientConfig clientConfig = new DefaultClientConfig();
+		clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
+
+		Client client = Client.create(clientConfig);
+		WebResource webResource = client.resource("http://localhost:8080/ontomatch/rest/mesh");
 
 		ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON).type(MediaType.APPLICATION_JSON).post(ClientResponse.class, jsonParams);
 
